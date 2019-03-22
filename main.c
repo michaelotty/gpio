@@ -19,8 +19,8 @@ int main (int argc, char *argv[]){
 	pinMode(14, INPUT);
 	pinMode(15, INPUT);
 	pinMode(16, INPUT);
-	pinMode(17, INPUT);
-	pinMode(18, INPUT);
+	pinMode(21, INPUT);
+	pinMode(22, INPUT);
 	pinMode(19, INPUT);
 	pinMode(20, INPUT);
 	pinMode(21, INPUT);
