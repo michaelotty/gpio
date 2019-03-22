@@ -21,32 +21,30 @@ int main (int argc, char *argv[]){
 	pinMode(16, INPUT);
 	pinMode(21, INPUT);
 	pinMode(22, INPUT);
-	pinMode(19, INPUT);
-	pinMode(20, INPUT);
-	pinMode(21, INPUT);
-	pinMode(22, INPUT);
 	pinMode(23, INPUT);
-
-	pinMode(24, OUTPUT);
-
+	pinMode(24, INPUT);
 	pinMode(25, INPUT);
 	pinMode(26, INPUT);
+	pinMode(27, INPUT);
 
-	pinMode(27, OUTPUT);
 	pinMode(28, OUTPUT);
 
-	digitalWrite(24, HIGH);
-	digitalWrite(27, HIGH);
+	pinMode(29, INPUT);
+
+	pinMode(30, OUTPUT);
+	pinMode(31, OUTPUT);
+
 	digitalWrite(28, HIGH);
+	digitalWrite(30, HIGH);
+	digitalWrite(31, HIGH);
 
 	int i[47];
 	while(1) {
-		digitalWrite(0, LOW);
+		digitalWrite(28, LOW);
+		digitalWrite(28, HIGH);
 
-		i = digitalRead(2);
-
-		digitalWrite(1, LOW);
-		digitalWrite(15, LOW);
+		int j = digitalRead(2);
+		digitalWrite(30, LOW);
 
 		i[0] = digitalRead(0);
 		i[1] = digitalRead(1);
@@ -60,27 +58,42 @@ int main (int argc, char *argv[]){
 		i[9] = digitalRead(9);
 		i[10] = digitalRead(10);
 		i[11] = digitalRead(11);
+		
+		digitalWrite(30, HIGH);
+		
+		digitalWrite(30, LOW);
 
-		digitalWrite(0, HIGH);
+		i[12] = digitalRead(0);
+		i[13] = digitalRead(1);
+		i[14] = digitalRead(2);
+		i[15] = digitalRead(3);
+		i[16] = digitalRead(4);
+		i[17] = digitalRead(5);
+		i[18] = digitalRead(6);
+		i[19] = digitalRead(7);
+		i[20] = digitalRead(8);
+		i[21] = digitalRead(9);
+		i[22] = digitalRead(10);
+		i[23] = digitalRead(11);
+		
+		digitalWrite(30, HIGH);
+		
+		digitalWrite(31, LOW);
 
-		digitalWrite(15, HIGH);
-		digitalWrite(15, LOW);
+		i[24] = digitalRead(28);
+		i[25] = digitalRead(25);
+		i[26] = digitalRead(26);
+		i[27] = digitalRead(27);
+		i[28] = digitalRead(28);
+		i[29] = digitalRead(29);
+		i[30] = digitalRead(30);
+		i[31] = digitalRead(19);
+		i[32] = digitalRead(20);
+		i[33] = digitalRead(21);
+		i[34] = digitalRead(22);
+		i[35] = digitalRead(23);
 
-		i[12] = digitalRead(12);
-		i[13] = digitalRead(13);
-		i[14] = digitalRead(14);
-		i[15] = digitalRead(15);
-		i[16] = digitalRead(16);
-		i[17] = digitalRead(17);
-		i[18] = digitalRead(18);
-		i[19] = digitalRead(19);
-		i[20] = digitalRead(20);
-		i[21] = digitalRead(21);
-		i[22] = digitalRead(22);
-		i[23] = digitalRead(23);
-
-		digitalWrite(15, HIGH);
-		digitalWrite(1, HIGH);
+		digitalWrite(31, HIGH);
 	}
 
 	return 0;
