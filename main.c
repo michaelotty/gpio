@@ -84,7 +84,7 @@ int main (int argc, char *argv[]){
 
 		digitalWrite(15, HIGH);
 
-		digitalWrite(15, LOW);
+		digitalWrite(16, LOW);
 
 		i[24] = digitalRead(28);
 		i[25] = digitalRead(25);
@@ -99,7 +99,8 @@ int main (int argc, char *argv[]){
 		i[34] = digitalRead(22);
 		i[35] = digitalRead(23);
 
-		digitalWrite(15, HIGH);
+		digitalWrite(16, HIGH);
+    digitalWrite(14, HIGH);
 	}
 
 	return 0;
