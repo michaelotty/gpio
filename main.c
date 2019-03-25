@@ -86,18 +86,18 @@ int main (int argc, char *argv[]){
 
 		digitalWrite(16, LOW);
 
-		i[24] = digitalRead(28);
-		i[25] = digitalRead(25);
-		i[26] = digitalRead(26);
-		i[27] = digitalRead(27);
-		i[28] = digitalRead(28);
-		i[29] = digitalRead(29);
-		i[30] = digitalRead(30);
-		i[31] = digitalRead(19);
-		i[32] = digitalRead(20);
-		i[33] = digitalRead(21);
-		i[34] = digitalRead(22);
-		i[35] = digitalRead(23);
+		i[36] = digitalRead(28);
+		i[37] = digitalRead(25);
+		i[38] = digitalRead(26);
+		i[39] = digitalRead(27);
+		i[40] = digitalRead(28);
+		i[41] = digitalRead(29);
+		i[42] = digitalRead(30);
+		i[43] = digitalRead(19);
+		i[44] = digitalRead(20);
+		i[45] = digitalRead(21);
+		i[46] = digitalRead(22);
+		i[47] = digitalRead(23);
 
 		digitalWrite(16, HIGH);
     digitalWrite(14, HIGH);
