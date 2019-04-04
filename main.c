@@ -1,4 +1,5 @@
 #include <wiringPi.h>
+#include <stdio.h>
 
 int main (int argc, char *argv[]){
 	wiringPiSetup();
@@ -33,21 +34,33 @@ int main (int argc, char *argv[]){
 		digitalWrite(14, LOW);
     digitalWrite(15, LOW);
 
-		i[0] = digitalRead(0);
-		i[1] = digitalRead(1);
-		i[2] = digitalRead(2);
-		i[3] = digitalRead(3);
-		i[4] = digitalRead(4);
-		i[5] = digitalRead(5);
-		i[6] = digitalRead(6);
-		i[7] = digitalRead(7);
-		i[8] = digitalRead(8);
-		i[9] = digitalRead(9);
-		i[10] = digitalRead(10);
-		i[11] = digitalRead(11);
+		i[0] = digitalRead(11);
+		i[0] = i[0] << 1;
+		i[0] = digitalRead(10);
+		i[0] = i[0] << 1;
+		i[0] = digitalRead(9);
+		i[0] = i[0] << 1;
+		i[0] = digitalRead(8);
+		i[0] = i[0] << 1;
+		i[0] = digitalRead(7);
+		i[0] = i[0] << 1;
+		i[0] = digitalRead(6);
+		i[0] = i[0] << 1;
+		i[0] = digitalRead(5);
+		i[0] = i[0] << 1;
+		i[0] = digitalRead(4);
+		i[0] = i[0] << 1;
+		i[0] = digitalRead(3);
+		i[0] = i[0] << 1;
+		i[0] = digitalRead(2);
+		i[0] = i[0] << 1;
+    i[0] = digitalRead(1);
+		i[0] = i[0] << 1;
+    i[0] = digitalRead(0);
+		i[0] = i[0] << 1;
 		
 		digitalWrite(15, HIGH);
-		
+		printf("%d\n", i[0]);
 		digitalWrite(16, LOW);
 
 		i[12] = digitalRead(0);
