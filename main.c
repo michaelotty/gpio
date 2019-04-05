@@ -46,7 +46,7 @@ int main(int argc, char *argv[]){
 	digitalWrite(RD, HIGH);
 
 	int i[4];
-	while(1) {
+	for(int j = 0; j<6; j++) {
 		digitalWrite(CONV, LOW);
 		digitalWrite(CONV, HIGH);
 
