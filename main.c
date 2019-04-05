@@ -16,8 +16,9 @@
 #define CS_A 15
 #define CS_B 16
 
-#include <wiringPi.h>
 #include <stdio.h>
+#include <time.h>
+#include <wiringPi.h>
 
 int getSample();
 
@@ -46,7 +47,13 @@ int main(int argc, char *argv[]){
 	digitalWrite(RD, HIGH);
 
 	int i[4];
-	for(int j = 0; j<6; j++) {
+  
+  clock_t start, end;
+  double cpu_time;
+
+  for(int k = 0; k<10; k++) {
+  start = clock();
+	for(int j = 0; j<1000; j++) {
 		digitalWrite(CONV, LOW);
 		digitalWrite(CONV, HIGH);
 
@@ -77,9 +84,14 @@ int main(int argc, char *argv[]){
 
 		digitalWrite(CS_B, HIGH);
  		digitalWrite(RD, HIGH);
-		printf("S1: %d\tS2: %d\tS3: %d\tS4: %d\n", i[0], i[1], i[2], i[3]);
+//		printf("S1: %d\tS2: %d\tS3: %d\tS4: %d\n", i[0], i[1], i[2], i[3]);
 	}
 
+  end = clock();
+  cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+  printf("time: %f\n", cpu_time);
+}
 	return 0;
 }
 
