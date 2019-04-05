@@ -51,7 +51,7 @@ int main(int argc, char *argv[]){
 		digitalWrite(CONV, HIGH);
 
 		digitalWrite(RD, LOW);
-    		digitalWrite(CS_A, LOW);
+ 		digitalWrite(CS_A, LOW);
 
 		i[0] = getSample();
 		
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]){
 		i[3] = getSample();
 
 		digitalWrite(CS_B, HIGH);
-    		digitalWrite(RD, HIGH);
+ 		digitalWrite(RD, HIGH);
 		printf("S1: %d\tS2: %d\tS3: %d\tS4: %d\n", i[0], i[1], i[2], i[3]);
 	}
 
@@ -84,6 +84,7 @@ int main(int argc, char *argv[]){
 }
 
 int getSample() {
+  int a, b, c, d, e, f, g, h, i, j, k, l;
 	a = digitalRead(D11);
 	a = a << 11;
 	b = digitalRead(D10);
@@ -104,11 +105,11 @@ int getSample() {
 	i = i << 3;
 	j = digitalRead(D2);
 	j = j << 2;
-    	k = digitalRead(D1);
+ 	k = digitalRead(D1);
 	k = k << 1;
-    	l = digitalRead(D0);
+ 	l = digitalRead(D0);
 	
-	sample = 0b000000000000 | a | b | c | d | e | f | g | h | i | j | k | l;
+	int sample = 0b000000000000 | a | b | c | d | e | f | g | h | i | j | k | l;
 	
 	return sample;
 }
