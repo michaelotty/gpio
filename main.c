@@ -51,9 +51,8 @@ int main(int argc, char *argv[]){
   clock_t start, end;
   double cpu_time;
 
-  for(int k = 0; k<10; k++) {
   start = clock();
-	for(int j = 0; j<1000; j++) {
+	for(int j = 0; j<1; j++) {
 		digitalWrite(CONV, LOW);
 		digitalWrite(CONV, HIGH);
 
@@ -91,7 +90,6 @@ int main(int argc, char *argv[]){
   cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
 
   printf("time: %f\n", cpu_time);
-}
 	return 0;
 }
 
@@ -122,6 +120,8 @@ int getSample() {
  	l = digitalRead(D0);
 	
 	int sample = 0b000000000000 | a | b | c | d | e | f | g | h | i | j | k | l;
-	
+
+  printf("%d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, c, d, e, f, g, h, i, j, k, l); 
+
 	return sample;
 }
