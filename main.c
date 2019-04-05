@@ -1,120 +1,114 @@
+#define D0 0
+#define D1 1
+#define D2 2
+#define D3 3
+#define D4 4
+#define D5 5
+#define D6 6
+#define D7 7
+#define D8 8
+#define D9 9
+#define D10 10
+#define D11 11
+#define CONV 12
+#define BUSY 13
+#define RD 14
+#define CS_A 15
+#define CS_B 16
+
 #include <wiringPi.h>
 #include <stdio.h>
 
-int main (int argc, char *argv[]){
+int getSample();
+
+int main(int argc, char *argv[]){
 	wiringPiSetup();
-	pinMode(0, INPUT);
-	pinMode(1, INPUT);
-	pinMode(2, INPUT);
-	pinMode(3, INPUT);
-	pinMode(4, INPUT);
-	pinMode(5, INPUT);
-	pinMode(6, INPUT);
-	pinMode(7, INPUT);
-	pinMode(8, INPUT);
-	pinMode(9, INPUT);
-	pinMode(10, INPUT);
-	pinMode(11, INPUT);
-	pinMode(12, OUTPUT);
-	pinMode(13, INPUT);
-	pinMode(14, OUTPUT);
-	pinMode(15, OUTPUT);
-	pinMode(16, OUTPUT);
+	pinMode(D0, INPUT);
+	pinMode(D1, INPUT);
+	pinMode(D2, INPUT);
+	pinMode(D3, INPUT);
+	pinMode(D4, INPUT);
+	pinMode(D5, INPUT);
+	pinMode(D6, INPUT);
+	pinMode(D7, INPUT);
+	pinMode(D8, INPUT);
+	pinMode(D9, INPUT);
+	pinMode(D10, INPUT);
+	pinMode(D11, INPUT);
+	pinMode(CONV, OUTPUT);
+	pinMode(BUSY, INPUT);
+	pinMode(RD, OUTPUT);
+	pinMode(CS_A, OUTPUT);
+	pinMode(CS_B, OUTPUT);
 
-	digitalWrite(14, HIGH);
-	digitalWrite(15, HIGH);
-	digitalWrite(16, HIGH);
+	digitalWrite(CS_A, HIGH);
+	digitalWrite(CS_B, HIGH);
+	digitalWrite(RD, HIGH);
 
-	int i[47];
+	int i[4];
 	while(1) {
-		digitalWrite(12, LOW);
-		digitalWrite(12, HIGH);
+		digitalWrite(CONV, LOW);
+		digitalWrite(CONV, HIGH);
 
-		int j = digitalRead(2);
-		digitalWrite(14, LOW);
-    digitalWrite(15, LOW);
+		digitalWrite(RD, LOW);
+    		digitalWrite(CS_A, LOW);
 
-		i[0] = digitalRead(11);
-		i[0] = i[0] << 1;
-		i[0] = digitalRead(10);
-		i[0] = i[0] << 1;
-		i[0] = digitalRead(9);
-		i[0] = i[0] << 1;
-		i[0] = digitalRead(8);
-		i[0] = i[0] << 1;
-		i[0] = digitalRead(7);
-		i[0] = i[0] << 1;
-		i[0] = digitalRead(6);
-		i[0] = i[0] << 1;
-		i[0] = digitalRead(5);
-		i[0] = i[0] << 1;
-		i[0] = digitalRead(4);
-		i[0] = i[0] << 1;
-		i[0] = digitalRead(3);
-		i[0] = i[0] << 1;
-		i[0] = digitalRead(2);
-		i[0] = i[0] << 1;
-    i[0] = digitalRead(1);
-		i[0] = i[0] << 1;
-    i[0] = digitalRead(0);
-		i[0] = i[0] << 1;
+		i[0] = getSample();
 		
-		digitalWrite(15, HIGH);
-		printf("%d\n", i[0]);
-		digitalWrite(16, LOW);
+		digitalWrite(CS_A, HIGH);
 
-		i[12] = digitalRead(0);
-		i[13] = digitalRead(1);
-		i[14] = digitalRead(2);
-		i[15] = digitalRead(3);
-		i[16] = digitalRead(4);
-		i[17] = digitalRead(5);
-		i[18] = digitalRead(6);
-		i[19] = digitalRead(7);
-		i[20] = digitalRead(8);
-		i[21] = digitalRead(9);
-		i[22] = digitalRead(10);
-		i[23] = digitalRead(11);
+		digitalWrite(CS_B, LOW);
+
+		i[1] = getSample();
 		
-		digitalWrite(14, HIGH);
-		digitalWrite(16, HIGH);
+		digitalWrite(RD, HIGH);
+		digitalWrite(CS_B, HIGH);
 		
-		digitalWrite(14, LOW);
-		digitalWrite(15, LOW);
+		digitalWrite(RD, LOW);
+		digitalWrite(CS_A, LOW);
 
-		i[24] = digitalRead(28);
-		i[25] = digitalRead(25);
-		i[26] = digitalRead(26);
-		i[27] = digitalRead(27);
-		i[28] = digitalRead(28);
-		i[29] = digitalRead(29);
-		i[30] = digitalRead(30);
-		i[31] = digitalRead(19);
-		i[32] = digitalRead(20);
-		i[33] = digitalRead(21);
-		i[34] = digitalRead(22);
-		i[35] = digitalRead(23);
+		i[2] = getSample();
 
-		digitalWrite(15, HIGH);
+		digitalWrite(CS_A, HIGH);
 
-		digitalWrite(16, LOW);
+		digitalWrite(CS_B, LOW);
 
-		i[36] = digitalRead(28);
-		i[37] = digitalRead(25);
-		i[38] = digitalRead(26);
-		i[39] = digitalRead(27);
-		i[40] = digitalRead(28);
-		i[41] = digitalRead(29);
-		i[42] = digitalRead(30);
-		i[43] = digitalRead(19);
-		i[44] = digitalRead(20);
-		i[45] = digitalRead(21);
-		i[46] = digitalRead(22);
-		i[47] = digitalRead(23);
+		i[3] = getSample();
 
-		digitalWrite(16, HIGH);
-    digitalWrite(14, HIGH);
+		digitalWrite(CS_B, HIGH);
+    		digitalWrite(RD, HIGH);
+		printf("S1: %d\tS2: %d\tS3: %d\tS4: %d\n", i[0], i[1], i[2], i[3]);
 	}
 
 	return 0;
+}
+
+int getSample() {
+	a = digitalRead(D11);
+	a = a << 11;
+	b = digitalRead(D10);
+	b = b << 10;
+	c = digitalRead(D9);
+	c = c << 9;
+	d = digitalRead(D8);
+	d = d << 8;
+	e = digitalRead(D7);
+	e = e << 7;
+	f = digitalRead(D6);
+	f = f << 6;
+	g = digitalRead(D5);
+	g = g << 5;
+	h = digitalRead(D4);
+	h = h << 4;
+	i = digitalRead(D3);
+	i = i << 3;
+	j = digitalRead(D2);
+	j = j << 2;
+    	k = digitalRead(D1);
+	k = k << 1;
+    	l = digitalRead(D0);
+	
+	sample = 0b000000000000 | a | b | c | d | e | f | g | h | i | j | k | l;
+	
+	return sample;
 }
