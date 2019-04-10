@@ -46,13 +46,15 @@ int main(int argc, char *argv[]){
 	digitalWrite(CS_B, HIGH);
 	digitalWrite(RD, HIGH);
 
-	int data[4];
+	int loops = 100;
+	int data[4*loops-1];
   
 	clock_t start, end;
   	double cpu_time;
 
   	start = clock();
-	for(int j = 0; j<100; j++) {
+
+	for(int i = 0; i < loops; i++) {
 		digitalWrite(CONV, LOW);
 		digitalWrite(CONV, HIGH);
 
@@ -63,13 +65,13 @@ int main(int argc, char *argv[]){
 		digitalWrite(RD, LOW);
 		digitalWrite(CS_A, LOW);
 
-		data[0] = getSample();
+		data[4*i] = getSample();
 
 		digitalWrite(CS_A, HIGH);
 
 		digitalWrite(CS_B, LOW);
 
-		data[1] = getSample();
+		data[4*i+1] = getSample();
 
 		digitalWrite(RD, HIGH);
 		digitalWrite(CS_B, HIGH);
@@ -77,17 +79,21 @@ int main(int argc, char *argv[]){
 		digitalWrite(RD, LOW);
 		digitalWrite(CS_A, LOW);
 
-		data[2] = getSample();
+		data[4*i+2] = getSample();
 
 		digitalWrite(CS_A, HIGH);
 
 		digitalWrite(CS_B, LOW);
 
-		data[3] = getSample();
+		data[4*i+3] = getSample();
 
 		digitalWrite(CS_B, HIGH);
 		digitalWrite(RD, HIGH);
 		printf("\n"); 
+	}
+
+	for (int i = 0; i < (4*loops); i++) {
+		printf("%d ", data[i]);
 	}
 
 	end = clock();
@@ -130,7 +136,7 @@ int getSample() {
 	}
 
   	printf("%d\t", sample);
-//  printf("%d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, c, d, e, f, g, h, i, j, k, l); 
+	//  printf("%d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, c, d, e, f, g, h, i, j, k, l); 
 
 	return sample;
 }
