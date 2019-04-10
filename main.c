@@ -52,9 +52,13 @@ int main(int argc, char *argv[]){
   double cpu_time;
 
   start = clock();
-	for(int j = 0; j<1; j++) {
+	for(int j = 0; j<100; j++) {
 		digitalWrite(CONV, LOW);
 		digitalWrite(CONV, HIGH);
+
+    while(digitalRead(BUSY)){
+      printf("loop");
+    }// Wait until BUSY is 0
 
 		digitalWrite(RD, LOW);
  		digitalWrite(CS_A, LOW);
@@ -83,7 +87,7 @@ int main(int argc, char *argv[]){
 
 		digitalWrite(CS_B, HIGH);
  		digitalWrite(RD, HIGH);
-//		printf("S1: %d\tS2: %d\tS3: %d\tS4: %d\n", i[0], i[1], i[2], i[3]);
+		printf("\n"); 
 	}
 
   end = clock();
@@ -119,9 +123,14 @@ int getSample() {
 	k = k << 1;
  	l = digitalRead(D0);
 	
-	int sample = 0b000000000000 | a | b | c | d | e | f | g | h | i | j | k | l;
+	int sample = 0x000 | b | c | d | e | f | g | h | i | j | k | l;
 
-  printf("%d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, c, d, e, f, g, h, i, j, k, l); 
+  if (a) {
+    sample = sample & 0xFFF;
+}
+
+  printf("%d\t", sample);
+//  printf("%d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, c, d, e, f, g, h, i, j, k, l); 
 
 	return sample;
 }
