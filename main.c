@@ -46,59 +46,59 @@ int main(int argc, char *argv[]){
 	digitalWrite(CS_B, HIGH);
 	digitalWrite(RD, HIGH);
 
-	int i[4];
+	int data[4];
   
-  clock_t start, end;
-  double cpu_time;
+	clock_t start, end;
+  	double cpu_time;
 
-  start = clock();
+  	start = clock();
 	for(int j = 0; j<100; j++) {
 		digitalWrite(CONV, LOW);
 		digitalWrite(CONV, HIGH);
 
-    while(digitalRead(BUSY)){
-      printf("loop");
-    }// Wait until BUSY is 0
+		while(digitalRead(BUSY)){
+			printf("loop\n");
+		}// Wait until BUSY is 0
 
-		digitalWrite(RD, LOW);
- 		digitalWrite(CS_A, LOW);
-
-		i[0] = getSample();
-		
-		digitalWrite(CS_A, HIGH);
-
-		digitalWrite(CS_B, LOW);
-
-		i[1] = getSample();
-		
-		digitalWrite(RD, HIGH);
-		digitalWrite(CS_B, HIGH);
-		
 		digitalWrite(RD, LOW);
 		digitalWrite(CS_A, LOW);
 
-		i[2] = getSample();
+		data[0] = getSample();
 
 		digitalWrite(CS_A, HIGH);
 
 		digitalWrite(CS_B, LOW);
 
-		i[3] = getSample();
+		data[1] = getSample();
+
+		digitalWrite(RD, HIGH);
+		digitalWrite(CS_B, HIGH);
+
+		digitalWrite(RD, LOW);
+		digitalWrite(CS_A, LOW);
+
+		data[2] = getSample();
+
+		digitalWrite(CS_A, HIGH);
+
+		digitalWrite(CS_B, LOW);
+
+		data[3] = getSample();
 
 		digitalWrite(CS_B, HIGH);
- 		digitalWrite(RD, HIGH);
+		digitalWrite(RD, HIGH);
 		printf("\n"); 
 	}
 
-  end = clock();
-  cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+	end = clock();
+	cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
 
-  printf("time: %f\n", cpu_time);
+	printf("time: %f\n", cpu_time);
 	return 0;
 }
 
 int getSample() {
-  int a, b, c, d, e, f, g, h, i, j, k, l;
+	int a, b, c, d, e, f, g, h, i, j, k, l;
 	a = digitalRead(D11);
 	a = a << 11;
 	b = digitalRead(D10);
@@ -125,12 +125,13 @@ int getSample() {
 	
 	int sample = 0x000 | b | c | d | e | f | g | h | i | j | k | l;
 
-  if (a) {
-    sample = sample & 0xFFF;
-}
+  	if (a) {
+    		sample = sample & 0xFFF;
+	}
 
-  printf("%d\t", sample);
+  	printf("%d\t", sample);
 //  printf("%d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, c, d, e, f, g, h, i, j, k, l); 
 
 	return sample;
 }
+
