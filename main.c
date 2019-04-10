@@ -100,6 +100,11 @@ int main(int argc, char *argv[]){
 	cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
 
 	printf("time: %f\n", cpu_time);
+
+	/*double x, y;
+	getPosition_initialize();
+	getPosition(data, data, data, data, &x, &y);
+	getPosition_terminate();*/
 	return 0;
 }
 
