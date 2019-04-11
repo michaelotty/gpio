@@ -46,8 +46,8 @@ int main(int argc, char *argv[]){
 	digitalWrite(CS_B, HIGH);
 	digitalWrite(RD, HIGH);
 
-	int loops = 100;
-	int data[4*loops-1];
+	int loops = 8000;
+	int data[(4*loops)-1];
   
 	clock_t start, end;
   	double cpu_time;
@@ -139,13 +139,14 @@ int getSample() {
 	k = k << 1;
  	l = digitalRead(D0);
 	
-	int sample = 0x000 | b | c | d | e | f | g | h | i | j | k | l;
+	int sample = 0x000 | a | b | c | d | e | f | g | h | i | j | k | l;
 
-  	if (a) {
+	sample = (sample >> 11) == 0 ? sample : (-1 ^ 0xFFF) | sample;
+  	/*if (a) {
 		printf("negated\t");
-    		sample = ~sample & 0xFFF;
+    		sample = sample ^ 0x7FF;
 		sample++;
-	}
+	}*/
 
   	//printf("%d\t", sample);
 	//  printf("%d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, c, d, e, f, g, h, i, j, k, l); 
