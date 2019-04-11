@@ -1,5 +1,6 @@
 # Main program
 gpio
+*.txt
 
 # Prerequisites
 *.d

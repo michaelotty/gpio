@@ -89,12 +89,17 @@ int main(int argc, char *argv[]){
 
 		digitalWrite(CS_B, HIGH);
 		digitalWrite(RD, HIGH);
-		printf("\n"); 
+		//printf("\n"); 
 	}
 
+	FILE *f;
+        f = fopen("output.txt", "w");
 	for (int i = 0; i < (4*loops); i++) {
-		printf("%d ", data[i]);
+		fprintf(f, "%d\n", data[i]);
 	}
+	fclose(f);
+
+	//printf("\n");
 
 	end = clock();
 	cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
@@ -137,10 +142,12 @@ int getSample() {
 	int sample = 0x000 | b | c | d | e | f | g | h | i | j | k | l;
 
   	if (a) {
-    		sample = sample & 0xFFF;
+		printf("negated\t");
+    		sample = ~sample & 0xFFF;
+		sample++;
 	}
 
-  	printf("%d\t", sample);
+  	//printf("%d\t", sample);
 	//  printf("%d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, c, d, e, f, g, h, i, j, k, l); 
 
 	return sample;
