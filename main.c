@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 	digitalWrite(RD, HIGH);
 
 	int loops = 8000;
-	int data[(4*loops)-1];
+	double data[(4*loops)-1];
   
 	clock_t start, end;
   	double cpu_time;
@@ -95,7 +95,7 @@ int main(int argc, char *argv[]){
 	FILE *f;
         f = fopen("output.txt", "w");
 	for (int i = 0; i < (4*loops); i++) {
-		fprintf(f, "%d\n", data[i]);
+		fprintf(f, "%f\n", data[i]);
 	}
 	fclose(f);
 
@@ -106,11 +106,12 @@ int main(int argc, char *argv[]){
 
 	printf("time: %f\n", cpu_time);
 
-	/*double x, y;
+/*	double x, y;
+
 	getPosition_initialize();
 	getPosition(data, data, data, data, &x, &y);
-	getPosition_terminate();*/
-	return 0;
+	getPosition_terminate();
+*/	return 0;
 }
 
 int getSample() {
