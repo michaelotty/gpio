@@ -17,12 +17,15 @@
 #define CS_B 16
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <wiringPi.h>
 
 int getSample();
 
 int main(int argc, char *argv[]){
+  delay(5000);
+
 	wiringPiSetup();
 	pinMode(D0, INPUT);
 	pinMode(D1, INPUT);
@@ -47,7 +50,7 @@ int main(int argc, char *argv[]){
 	digitalWrite(RD, HIGH);
 
 	int loops = 8000;
-	double data[(4*loops)-1];
+	int data[(4*loops)-1];
   
 	clock_t start, end;
   	double cpu_time;
@@ -59,8 +62,9 @@ int main(int argc, char *argv[]){
 		digitalWrite(CONV, HIGH);
 
 		while(digitalRead(BUSY)){
-			printf("loop\n");
+			printf("ADC is busy...\n");
 		}// Wait until BUSY is 0
+    
 
 		digitalWrite(RD, LOW);
 		digitalWrite(CS_A, LOW);
@@ -95,7 +99,7 @@ int main(int argc, char *argv[]){
 	FILE *f;
         f = fopen("output.txt", "w");
 	for (int i = 0; i < (4*loops); i++) {
-		fprintf(f, "%f\n", data[i]);
+		fprintf(f, "%f\n", data[i]/4096.0);
 	}
 	fclose(f);
 
