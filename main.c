@@ -1,3 +1,4 @@
+//Define all the pin number names
 #define D0 0
 #define D1 1
 #define D2 2
@@ -16,15 +17,17 @@
 #define CS_A 15
 #define CS_B 16
 
+//Libraries
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+
 #include <wiringPi.h>
 
+//Function definitions
 int getSample();
 
 int main(int argc, char *argv[]){
-  delay(5000);
+	delay(5000);// 5 seconds
 
 	wiringPiSetup();
 	pinMode(D0, INPUT);
@@ -51,20 +54,14 @@ int main(int argc, char *argv[]){
 
 	int loops = 8000;
 	int data[(4*loops)-1];
-  
-	clock_t start, end;
-  	double cpu_time;
 
-  	start = clock();
-
-	for(int i = 0; i < loops; i++) {
+	for (int i = 0; i < loops; i++) {
 		digitalWrite(CONV, LOW);
 		digitalWrite(CONV, HIGH);
 
-		while(digitalRead(BUSY)){
+		while (digitalRead(BUSY)) {
 			printf("ADC is busy...\n");
-		}// Wait until BUSY is 0
-    
+		}
 
 		digitalWrite(RD, LOW);
 		digitalWrite(CS_A, LOW);
@@ -72,7 +69,6 @@ int main(int argc, char *argv[]){
 		data[4*i] = getSample();
 
 		digitalWrite(CS_A, HIGH);
-
 		digitalWrite(CS_B, LOW);
 
 		data[4*i+1] = getSample();
@@ -86,14 +82,12 @@ int main(int argc, char *argv[]){
 		data[4*i+2] = getSample();
 
 		digitalWrite(CS_A, HIGH);
-
 		digitalWrite(CS_B, LOW);
 
 		data[4*i+3] = getSample();
 
 		digitalWrite(CS_B, HIGH);
 		digitalWrite(RD, HIGH);
-		//printf("\n"); 
 	}
 
 	FILE *f;
@@ -103,23 +97,12 @@ int main(int argc, char *argv[]){
 	}
 	fclose(f);
 
-	//printf("\n");
-
-	end = clock();
-	cpu_time = ((double) (end - start)) / CLOCKS_PER_SEC;
-
-	printf("time: %f\n", cpu_time);
-
-/*	double x, y;
-
-	getPosition_initialize();
-	getPosition(data, data, data, data, &x, &y);
-	getPosition_terminate();
-*/	return 0;
+	return 0;
 }
 
 int getSample() {
 	int a, b, c, d, e, f, g, h, i, j, k, l;
+
 	a = digitalRead(D11);
 	a = a << 11;
 	b = digitalRead(D10);
@@ -143,19 +126,10 @@ int getSample() {
  	k = digitalRead(D1);
 	k = k << 1;
  	l = digitalRead(D0);
-	
+
 	int sample = 0x000 | a | b | c | d | e | f | g | h | i | j | k | l;
 
 	sample = (sample >> 11) == 0 ? sample : (-1 ^ 0xFFF) | sample;
-  	/*if (a) {
-		printf("negated\t");
-    		sample = sample ^ 0x7FF;
-		sample++;
-	}*/
-
-  	//printf("%d\t", sample);
-	//  printf("%d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, c, d, e, f, g, h, i, j, k, l); 
 
 	return sample;
 }
-
