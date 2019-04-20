@@ -99,7 +99,7 @@ int main(int argc, char *argv[]){
 	FILE *f;
         f = fopen("output.txt", "w");
 	for (int i = 0; i < (4*loops); i++) {
-		fprintf(f, "%f\n", data[i]/4096.0);
+		fprintf(f, "%d\n", data[i]);
 	}
 	fclose(f);
 
