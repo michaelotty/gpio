@@ -21,9 +21,10 @@
 #include <stdio.h>
 #include <wiringPi.h>
 
-//Function definitions
+//Function declaration
 int getSample();
 
+//Function definitions
 int main(int argc, char *argv[]){
 	delay(5000);// 5 seconds
 
