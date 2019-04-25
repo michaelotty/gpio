@@ -26,7 +26,7 @@ int getSample();
 
 //Function definitions
 int main(int argc, char *argv[]){
-	delay(5000);// 5 seconds
+//	delay(5000);// 5 seconds
 
 	wiringPiSetup();
 	pinMode(D0, INPUT);
@@ -52,10 +52,11 @@ int main(int argc, char *argv[]){
 	digitalWrite(RD, HIGH);
 
 	int loops = 8000;
-	int data[(4*loops)-1];
+  int data[(4*loops)-1];
 
 	for (int i = 0; i < loops; i++) {
 		digitalWrite(CONV, LOW);
+    delayMicroseconds(1);
 		digitalWrite(CONV, HIGH);
 
 		while (digitalRead(BUSY)) {
@@ -63,6 +64,7 @@ int main(int argc, char *argv[]){
 		}
 
 		digitalWrite(RD, LOW);
+    delayMicroseconds(1);
 		digitalWrite(CS_A, LOW);
 
 		data[4*i] = getSample();
@@ -73,6 +75,7 @@ int main(int argc, char *argv[]){
 		data[4*i+1] = getSample();
 
 		digitalWrite(RD, HIGH);
+    delayMicroseconds(1);
 		digitalWrite(CS_B, HIGH);
 
 		digitalWrite(RD, LOW);
@@ -102,29 +105,29 @@ int main(int argc, char *argv[]){
 int getSample() {
 	int a, b, c, d, e, f, g, h, i, j, k, l;
 
-	a = digitalRead(D11);
-	a = a << 11;
-	b = digitalRead(D10);
-	b = b << 10;
-	c = digitalRead(D9);
-	c = c << 9;
-	d = digitalRead(D8);
-	d = d << 8;
-	e = digitalRead(D7);
-	e = e << 7;
-	f = digitalRead(D6);
-	f = f << 6;
-	g = digitalRead(D5);
-	g = g << 5;
-	h = digitalRead(D4);
-	h = h << 4;
-	i = digitalRead(D3);
-	i = i << 3;
-	j = digitalRead(D2);
-	j = j << 2;
+ 	l = digitalRead(D0);
  	k = digitalRead(D1);
 	k = k << 1;
- 	l = digitalRead(D0);
+	j = digitalRead(D2);
+	j = j << 2;
+	i = digitalRead(D3);
+	i = i << 3;
+	h = digitalRead(D4);
+	h = h << 4;
+	g = digitalRead(D5);
+	g = g << 5;
+	b = digitalRead(D10);
+	b = b << 10;
+	a = digitalRead(D11);
+	a = a << 11;
+	f = digitalRead(D6);
+	f = f << 6;
+	e = digitalRead(D7);
+	e = e << 7;
+	d = digitalRead(D8);
+	d = d << 8;
+	c = digitalRead(D9);
+	c = c << 9;
 
 	int sample = 0x000 | a | b | c | d | e | f | g | h | i | j | k | l;
 
